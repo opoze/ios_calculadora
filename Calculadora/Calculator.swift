@@ -111,7 +111,12 @@ class Calculator {
             }
             // if display is 0 then dont append, just override
             if self.display == "0" {
-                self.display = char
+                if char == "," {
+                    self.display = "0,"
+                }
+                else {
+                    self.display = char
+                }
             }
             else {
                 self.display.append(char)

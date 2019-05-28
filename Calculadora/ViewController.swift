@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     lazy var calculator = Calculator()
+    var blink: Bool = false
 
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var op: UILabel!
@@ -18,8 +19,10 @@ class ViewController: UIViewController {
     @IBOutlet var btns: [UIButton]!
     
     @IBAction func operation(_ button: UIButton) {
+        self.blink = true
         switch button.currentTitle {
             case "0","1","2","3","4","5","6","7","8","9":
+                self.blink = false
                 self.calculator.number(number: button.currentTitle ?? "0")
                 break
             case "-":
@@ -44,12 +47,14 @@ class ViewController: UIViewController {
                 self.calculator.equal()
                 break
             case ",":
+                self.blink = false
                 self.calculator.dot()
                 break
             case "C":
                 self.calculator.cleanAll()
                 break
             case "-/+":
+                self.blink = false
                 self.calculator.togglePositive()
                 break
             default:
@@ -66,6 +71,10 @@ class ViewController: UIViewController {
     }
     
     func updateViewModel(){
+        // if display value has changed, then blink
+        if self.blink {
+            self.display.startBlink()
+        }
         self.display.text = self.calculator.display
         self.op.text = self.calculator.operationType
         self.memory.text = String(self.calculator.memory)
