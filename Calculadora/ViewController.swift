@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         for btn in btns {
-            btn.layer.cornerRadius = 40
+            btn.layer.cornerRadius = 10
         }
     }
     
